@@ -30,6 +30,19 @@
     - if Rails.env.production?
       = render 'shared/google_analytics'
 
+    - if request.path_info.include?('charts')
+
+      = javascript_include_tag '//cdn.jsdelivr.net/d3js/3.5.17/d3.min.js'
+      = javascript_include_tag '//cdn.jsdelivr.net/npm/taucharts@1/build/production/tauCharts.min.js'
+      = stylesheet_link_tag '//cdn.jsdelivr.net/npm/taucharts@1/build/production/tauCharts.min.css'
+
+      = javascript_include_tag 'lib/chartist.min'
+      = javascript_include_tag 'lib/chartist-plugin-months-axis'
+      = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/chartist-plugin-legend/0.6.2/chartist-plugin-legend.min.js'
+      = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js'
+      = javascript_include_tag 'charts'
+      = stylesheet_link_tag 'charts'
+
   %body{:class => "#{@bodyClassList} year#{@year.year}"}
     .body-container
       = render "#{@year.year}/layouts/header" rescue render '/layouts/header'

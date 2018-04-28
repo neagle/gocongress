@@ -98,6 +98,10 @@ Gocongress::Application.routes.draw do
           end
         end
 
+        namespace :charts do
+          resource :registrations, :only => :show
+        end
+
         # This route provides `year_path`, so it's not defunct,
         # but perhaps it can be combined with the other `root`
         # at the top of the file?

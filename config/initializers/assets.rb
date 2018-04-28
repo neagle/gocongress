@@ -1,1 +1,5 @@
 Rails.application.config.assets.precompile += %w( print.css )
+Rails.application.config.assets.precompile += %w( lib/chartist.min.js )
+Rails.application.config.assets.precompile += %w( lib/chartist-plugin-months-axis.js )
+Rails.application.config.assets.precompile += %w( charts.css )
+Rails.application.config.assets.precompile += %w( charts.js )
