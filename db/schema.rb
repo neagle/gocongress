@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180322102515) do
+ActiveRecord::Schema.define(version: 20180429142041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,6 +192,14 @@ ActiveRecord::Schema.define(version: 20180322102515) do
     t.index ["hex_triplet", "year"], name: "index_shirts_on_hex_triplet_and_year", unique: true, using: :btree
     t.index ["id", "year"], name: "index_shirts_on_id_and_year", unique: true, using: :btree
     t.index ["name", "year"], name: "index_shirts_on_name_and_year", unique: true, using: :btree
+  end
+
+  create_table "sms_notifications", force: :cascade do |t|
+    t.string   "to"
+    t.string   "from"
+    t.text     "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tournaments", force: :cascade do |t|
