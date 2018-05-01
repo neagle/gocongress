@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20180501151334) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "activities", id: :integer, default: -> { "nextval('events_id_seq'::regclass)" }, force: :cascade do |t|
+   create_table "activities", force: :cascade do |t|
     t.string   "name",                 limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -35,14 +35,14 @@ ActiveRecord::Schema.define(version: 20180501151334) do
     t.index ["year", "leave_time"], name: "index_activities_on_year_and_start", using: :btree
   end
 
-  create_table "activity_categories", id: :integer, default: -> { "nextval('event_categories_id_seq'::regclass)" }, force: :cascade do |t|
+  create_table "activity_categories", force: :cascade do |t|
     t.string  "name",        limit: 25,  null: false
     t.integer "year",                    null: false
     t.string  "description", limit: 500
     t.index ["id", "year"], name: "uniq_activity_categories_on_id_and_year", unique: true, using: :btree
   end
 
-  create_table "attendee_activities", id: :integer, default: -> { "nextval('attendee_events_id_seq'::regclass)" }, force: :cascade do |t|
+  create_table "attendee_activities", force: :cascade do |t|
     t.integer  "attendee_id", null: false
     t.integer  "activity_id", null: false
     t.datetime "created_at"
@@ -249,13 +249,6 @@ ActiveRecord::Schema.define(version: 20180501151334) do
     t.integer  "amount",                         null: false
     t.index ["user_id"], name: "index_transactions_on_user_id", using: :btree
     t.index ["year", "created_at"], name: "index_transactions_on_year_and_created_at", using: :btree
-  end
-
-  create_table "user_jobs", force: :cascade do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "user_id"
-    t.integer  "job_id"
   end
 
   create_table "users", force: :cascade do |t|
