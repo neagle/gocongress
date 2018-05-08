@@ -2,7 +2,7 @@ require "invoice_item"
 
 class Attendee < ApplicationRecord
   include YearlyModel
-  PHONE_REGEX = /(?:\+?|\b)[0-9]{10}\b/
+  PHONE_REGEX = /\A[0-9]*/
   # Associations
   # ------------
 
@@ -38,7 +38,8 @@ class Attendee < ApplicationRecord
   validates :guardian_full_name, :presence => { :if => :require_guardian_full_name? }
   validates :local_phone,
             presence: true,
-            format: { with: PHONE_REGEX, message: "must be 10 numbers with no spaces" },
+            format: { with: PHONE_REGEX, message: "must contain integers only" },
+            length: { is: 10, message: "must contain exactly 10 digits" },
             if: Proc.new { |a| a.receive_sms }
   validates :minor_agreement_received, :inclusion => {:in => [true, false]}
   validates :rank,
