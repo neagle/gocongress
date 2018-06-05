@@ -4,14 +4,21 @@ namespace :attendees do
   task migrate_sms_plans: :environment do
 
     attendees_with_sms_plans = Attendee.select('attendees.id, attendees.phone, attendees.local_phone, attendees.receive_sms').joins(:plans).where('plans.name = ?', "Yes! SMS!")
+    attendees_without_sms_plans = Attendee.select('attendees.id, attendees.phone, attendees.local_phone, attendees.receive_sms').joins(:plans).where('plans.name = ?', "No SMS")
 
     puts <<-TEXT
     Going to migrate #{attendees_with_sms_plans.to_a.count} attendees from "Yes! SMS!" plan to Attendee receive_sms attribute set to true
+    Going to migrate #{attendees_without_sms_plans.to_a.count} attendees from "No SMS" plan to Attendee receive_sms attribute set to false
     TEXT
 
     ActiveRecord::Base.transaction do
       attendees_with_sms_plans.each do |a|
         a.update_attribute :receive_sms, true
+        print "."
+      end
+
+      attendees_without_sms_plans.each do |a|
+        a.update_attribute :receive_sms, false
         print "."
       end
     end
