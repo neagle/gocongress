@@ -1,3 +1,9 @@
+@import "mixins";
+@import "mixins/breakpoint";
+@import "functions/str-split";
+@import "functions/decimal-round";
+@import "variables";
+
 .homepage {
   .content {
 
@@ -30,6 +36,33 @@
 
     /* Misc. */
     &.past-years { padding: 3px 0px 0px 0px; }
+  }
+}
+
+/* Homepage mobile */
+@include breakpoint(lt-sm) {
+  .homepage .content {
+    width: auto;
+    #gallery-column {
+      display: none;
+    }
+    .curvy-text-container {
+      #usgc-logo.circular-logo {
+        left: 20px;
+        width: 100px;
+      }
+      h2 {
+        margin-left: 140px;
+        font-size: 18px;
+        white-space: normal;
+        width: auto;
+      }
+      p {
+        margin-top: 50px;
+        width: auto;
+      }
+      .curvy-spacer { display: none; }
+    }
   }
 }
 

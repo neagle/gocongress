@@ -1,5 +1,9 @@
 @import "intlTelInput";
 @import "mixins";
+@import "mixins/breakpoint";
+@import "functions/str-split";
+@import "functions/decimal-round";
+@import "variables";
 
 /* Configuration: Layout */
 $content_width: 880px;
@@ -165,6 +169,27 @@ body {
   text-shadow: 0px 0px 5px black;
 }
 
+/* Header in mobile screen */
+@include breakpoint(lt-sm) {
+  #header {
+    width: auto;
+    #usgc-title-container {
+      float: none;
+      text-align: center;
+      h1 {
+        font-size: 26px;
+        line-height: 26px;
+      }
+    }
+    #usgc-when-where-container {
+      font-size: 18px;
+      line-height: 20px;
+      text-align: center;
+      float: none;
+    }
+  }
+}
+
 /* Nav menu */
 .nav-container-admin { background-color: #64AEDE; }
 body {
@@ -215,8 +240,8 @@ body {
 
 /* Main content area */
 .content {
-  border-left: 1px solid #AAA;
-  border-right: 1px solid #AAA;
+  //border-left: 1px solid #AAA;
+  //border-right: 1px solid #AAA;
   border-bottom: 1px solid #AAA;
   margin: 0 auto;
   padding: 10px;
